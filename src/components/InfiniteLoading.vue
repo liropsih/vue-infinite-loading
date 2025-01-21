@@ -296,6 +296,13 @@ export default {
         distance = typeof this.scrollParent.scrollTop === 'number'
           ? this.scrollParent.scrollTop
           : this.scrollParent.pageYOffset;
+      } else if (this.direction === 'reverse-top') {
+        const infiniteElmOffsetTopFromBottom = this.$el.getBoundingClientRect().top;
+        const scrollElmOffsetTopFromBottom = this.scrollParent === window
+          ? window.innerHeight
+          : this.scrollParent.getBoundingClientRect().top;
+
+        distance = scrollElmOffsetTopFromBottom - infiniteElmOffsetTopFromBottom;
       } else {
         const infiniteElmOffsetTopFromBottom = this.$el.getBoundingClientRect().top;
         const scrollElmOffsetTopFromBottom = this.scrollParent === window
